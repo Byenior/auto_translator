@@ -13,12 +13,12 @@
         width: 100dvw;
         height: 100dvh;
       }
-      #translator {
+      #bg-translator {
         width: 400px;
         height: 200px;
         /* top: 95%; */
         /* right: -360px; */
-        background: #f6f6f6;
+        background: #c5c5c5;
         border: 1px solid;
         border-radius: 4px;
         position: fixed;
@@ -26,10 +26,29 @@
         padding: 5px;
         display: flex;
         flex-direction: column;
-        z-index: 2010;
+        z-index: 2;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
           rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        cursor: all-scroll;
       }
+      #translator {
+        width: 398px;
+        height: 180px;
+        background: #f6f6f6;
+        /* border: 1px solid; */
+        /* border-radius: 4px; */
+        position: fixed;
+        transition: right 0.5s ease;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        z-index: 3;
+        /* box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, */
+        /* rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
+        /* cursor: all-scroll; */
+        margin-top: 18px;
+      }
+
       #translator.open {
         top: 70%;
         right: 5%;
@@ -66,35 +85,66 @@
         cursor: pointer;
         display: none;
       }
+      #loadingTran {
+        width: 12px;
+        height: 12px;
+        border: 2px solid white;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        /* display: inline-block; */
+        display: none;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
-    <div style="width: 50%">
-      <h4>เนื้อเพลง รักนานๆ</h4>
-      <p>
-        ฉันรู้ว่าฉันโชคดีเท่าไหร่&nbsp; ที่ได้มีเธอร่วมเดินข้างกัน&nbsp;
-        จับมือและคอยรับฟังในวันที่ผิดหวัง&nbsp; ไม่ไปไหน ในทุก ๆ
-        วันฉันกลัวเหลือเกิน&nbsp; กลัวมีซักวันที่เธอหายไป&nbsp; ตลอดไปมีจริงไหม
-        ฉันภาวนาให้เป็นเรื่องจริง&nbsp; ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp;
-        ช่วยอยู่กันอย่างนี้นาน ๆ ได้ไหม&nbsp; แค่อยากจะเก็บทุก ๆ เวลา
-        และทุกวินาที&nbsp; ที่ฉันมีเธอคนนี้ข้าง ๆ กัน ช่วยอยู่ให้ฉันรักนาน ๆ
-        ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ&nbsp; เพราะเธอนั้นคือ
-        ความสุขของฉัน&nbsp; สัญญาจะดูแลจนวันสุดท้าย และจะรักเธอ
-        จนรักใครไม่ได้อีก ชีวิตที่เหลือไม่รู้เป็นไง แค่เรามีกันก็ไม่เป็นไร
-        ตลอดไปมีจริงไหม ฉันภาวนาให้เป็นเรื่องจริง&nbsp; ช่วยอยู่ให้ฉันรักนาน ๆ
-        ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ ได้ไหม&nbsp; แค่อยากจะเก็บทุกๆเวลา
-        และทุกวินาที&nbsp; ที่ฉันมีเธอคนนี้ข้าง ๆ กัน ช่วยอยู่ให้ฉันรักนาน ๆ
-        ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ&nbsp; เพราะเธอนั้นคือ
-        ความสุขของฉัน&nbsp; สัญญาจะดูแลจนวันสุดท้าย และจะรักเธอ
-        จนรักใครไม่ได้อีก อธิษฐานวิงวอนกับดาวนับร้อยพัน
-        ให้เธอนั้นเป็นรักสุดท้ายจะได้ไหม ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp;
-        ช่วยอยู่กันอย่างนี้นาน ๆ ได้ไหม&nbsp; แค่อยากจะเก็บทุก ๆ เวลา
-        และทุกวินาที&nbsp; ที่ฉันมีเธอคนนี้ข้าง ๆ กัน ช่วยอยู่ให้ฉันรักนาน ๆ
-        ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ&nbsp; เพราะเธอนั้นคือ
-        ความสุขของฉัน&nbsp; สัญญาจะดูแลจนวันสุดท้าย และจะรักเธอ
-        จนรักใครไม่ได้อีก
-      </p>
+    <div style="width: 50%; height: 100dvh">
+      <div>
+        <h4>เนื้อเพลง รักนานๆ</h4>
+        <p>
+          ฉันรู้ว่าฉันโชคดีเท่าไหร่&nbsp; ที่ได้มีเธอร่วมเดินข้างกัน&nbsp;
+          จับมือและคอยรับฟังในวันที่ผิดหวัง&nbsp; ไม่ไปไหน ในทุก ๆ
+          วันฉันกลัวเหลือเกิน&nbsp; กลัวมีซักวันที่เธอหายไป&nbsp;
+          ตลอดไปมีจริงไหม ฉันภาวนาให้เป็นเรื่องจริง&nbsp; ช่วยอยู่ให้ฉันรักนาน ๆ
+          ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ ได้ไหม&nbsp; แค่อยากจะเก็บทุก ๆ
+          เวลา และทุกวินาที&nbsp; ที่ฉันมีเธอคนนี้ข้าง ๆ กัน
+          ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ&nbsp;
+          เพราะเธอนั้นคือ ความสุขของฉัน&nbsp; สัญญาจะดูแลจนวันสุดท้าย
+          และจะรักเธอ จนรักใครไม่ได้อีก ชีวิตที่เหลือไม่รู้เป็นไง
+          แค่เรามีกันก็ไม่เป็นไร ตลอดไปมีจริงไหม ฉันภาวนาให้เป็นเรื่องจริง&nbsp;
+          ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ
+          ได้ไหม&nbsp; แค่อยากจะเก็บทุกๆเวลา และทุกวินาที&nbsp;
+          ที่ฉันมีเธอคนนี้ข้าง ๆ กัน ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp;
+          ช่วยอยู่กันอย่างนี้นาน ๆ&nbsp; เพราะเธอนั้นคือ ความสุขของฉัน&nbsp;
+          สัญญาจะดูแลจนวันสุดท้าย และจะรักเธอ จนรักใครไม่ได้อีก
+          อธิษฐานวิงวอนกับดาวนับร้อยพัน ให้เธอนั้นเป็นรักสุดท้ายจะได้ไหม
+          ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp; ช่วยอยู่กันอย่างนี้นาน ๆ
+          ได้ไหม&nbsp; แค่อยากจะเก็บทุก ๆ เวลา และทุกวินาที&nbsp;
+          ที่ฉันมีเธอคนนี้ข้าง ๆ กัน ช่วยอยู่ให้ฉันรักนาน ๆ ได้ไหม&nbsp;
+          ช่วยอยู่กันอย่างนี้นาน ๆ&nbsp; เพราะเธอนั้นคือ ความสุขของฉัน&nbsp;
+          สัญญาจะดูแลจนวันสุดท้าย และจะรักเธอ จนรักใครไม่ได้อีก
+        </p>
+      </div>
+      <div>
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="ทดลอง Paste"
+        ></textarea>
+      </div>
     </div>
+
+    <div id="bg-translator" class="smooth"></div>
 
     <div id="translator" class="smooth">
       <div id="open_tran" onclick="togglePosition('open')">
@@ -110,13 +160,19 @@
           id="exampleFormControlTextarea1"
           rows="3"
           placeholder="ลากข้อความบนเว็บ จะแปลอัตโนมัติ และกดctrl+v ได้เลย"
+          disabled
         ></textarea>
       </div>
       <div id="close_tran" onclick="togglePosition('close')">
         <p style="margin: 0">x</p>
       </div>
       <div>
-        <button type="button" class="btn btn-dark" onclick="translatex()">
+        <button
+          style="display: none"
+          type="button"
+          class="btn btn-dark"
+          onclick="translatex()"
+        >
           Translate <b><span id="loadingTran"></span></b>
         </button>
 
@@ -148,6 +204,7 @@
   href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
   rel="stylesheet"
 />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   let loadingTran = document.getElementById("loadingTran");
@@ -325,6 +382,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     let translator = document.getElementById("translator");
+    let bg_translator = document.getElementById("bg-translator");
 
     let isDraggingMove = false;
     let startXMove = 0;
@@ -332,46 +390,15 @@
     let startLeftMove = 0;
     let startTopMove = 0;
 
-    // let isDraggingScale = false;
-    // let startXScale = 0;
-    // let startYScale = 0;
-    // let startWidth1 = 0;
-    // let startHeight1 = 0;
-    // let startWidth2 = 0;
-    // let startHeight2 = 0;
-
-    translator.addEventListener("mousedown", onMouseDownMove);
-    translator.addEventListener("touchstart", onMouseDownMove);
-
-    translator.addEventListener("dblclick", function () {
-      //   moveDiv1.classList = "smooth";
-      translator.classList = "smooth";
-
-      setTimeout(() => {
-        // moveDiv1.style.left = "unset";
-        // moveDiv1.style.top = "10%";
-        // moveDiv1.style.right = "10%";
-
-        translator.style.left = "unset";
-        translator.style.top = "calc(10% - 0px)";
-        translator.style.right = "calc(10% - 0px)";
-      }, 200);
-
-      setTimeout(() => {
-        // moveDiv1.classList.remove("smooth");
-        translator.classList.remove("smooth");
-      }, 300);
-    });
-
-    // scale.addEventListener("mousedown", onMouseDownScale);
-    // scale.addEventListener("touchstart", onMouseDownScale);
+    bg_translator.addEventListener("mousedown", onMouseDownMove);
+    bg_translator.addEventListener("touchstart", onMouseDownMove);
 
     function onMouseDownMove(e) {
       isDraggingMove = true;
       startXMove = e.clientX || e.touches[0].clientX;
       startYMove = e.clientY || e.touches[0].clientY;
-      startLeftMove = parseInt(getComputedStyle(translator).left, 10) || 0;
-      startTopMove = parseInt(getComputedStyle(translator).top, 10) || 0;
+      startLeftMove = parseInt(getComputedStyle(bg_translator).left, 10) || 0;
+      startTopMove = parseInt(getComputedStyle(bg_translator).top, 10) || 0;
       e.preventDefault();
     }
 
@@ -381,9 +408,9 @@
         const clientY = e.clientY || e.touches[0].clientY;
         const deltaX = clientX - startXMove;
         const deltaY = clientY - startYMove;
-        // moveDiv1.style.left = startLeftMove + deltaX + 0 + "px";
-        // moveDiv1.style.top = startTopMove + deltaY + 0 + "px";
-        translator.style.left = startLeftMove + deltaX + "px";
+        bg_translator.style.left = startLeftMove + deltaX + "px";
+        bg_translator.style.top = startTopMove + deltaY + "px";
+        translator.style.left = startLeftMove + deltaX + 1 + "px";
         translator.style.top = startTopMove + deltaY + "px";
         e.preventDefault();
       }
@@ -397,8 +424,8 @@
       isDraggingScale = true;
       startXScale = e.clientX || e.touches[0].clientX;
       startYScale = e.clientY || e.touches[0].clientY;
-      startWidth1 = parseInt(getComputedStyle(translator).width, 10) || 0;
-      startHeight1 = parseInt(getComputedStyle(translator).height, 10) || 0;
+      startWidth1 = parseInt(getComputedStyle(bg_translator).width, 10) || 0;
+      startHeight1 = parseInt(getComputedStyle(bg_translator).height, 10) || 0;
 
       document.addEventListener("mousemove", onMouseMoveScale);
       document.addEventListener("touchmove", onMouseMoveScale);
@@ -414,8 +441,8 @@
         const deltaX = clientX - startXScale;
         const deltaY = clientY - startYScale;
 
-        translator.style.width = startWidth1 + deltaX + "px";
-        translator.style.height = startHeight1 + deltaY + "px";
+        bg_translator.style.width = startWidth1 + deltaX + "px";
+        bg_translator.style.height = startHeight1 + deltaY + "px";
         e.preventDefault();
       }
     }
